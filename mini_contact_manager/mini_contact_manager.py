@@ -124,7 +124,7 @@ def delete_contact():
 
 
 
-#For Updating Existing Conatct
+#For Updating Existing Contact
 def update_cont():
     '''Updating an existing contact'''
     contacts = load_contact()
