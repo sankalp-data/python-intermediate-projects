@@ -11,7 +11,7 @@ def load_contact():
             return json.load(f)
     
     except FileNotFoundError:
-        return [] # Return empty list file does not exist
+        return [] # Return empty list if file does not exist
     
     except json.JSONDecodeError:
         return [] # Return empty list if file is empty or corrupted
