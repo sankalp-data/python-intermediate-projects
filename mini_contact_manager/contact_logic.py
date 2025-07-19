@@ -1,7 +1,16 @@
 from pprint import pprint   
 import json
+import os
 
-path_of_file = "contacts.json" # Use relative path for cross-platform compatibility
+def load_config():
+    config_path = os.path.join(os.path.dirname(__file__), "config.json")
+    with open(config_path, "r") as f:
+        return json.load(f)
+
+
+path_of_file = os.path.join(os.path.dirname(__file__), "contacts.json") # Use relative path for cross-platform compatibility
+config = load_config()
+password = config["Password"]
 
 def load_contact():
     '''Loading contact list from JSON file'''
@@ -41,6 +50,7 @@ def adding_cont():
 
 
     for _ in range(number_of_con):
+        duplicate = False
 
         name = input("Enter Name :- ")
 
@@ -63,7 +73,14 @@ def adding_cont():
             "Email":email
         }
 
-        contact_list.append(details)
+        for contact in contact_list:
+            if contact["Name"].lower()==name.lower() or contact["Phone Number"]==phone_no:
+                print("Name/Phone Number already exist!!")
+                duplicate = True
+                break
+        
+        if not duplicate:
+            contact_list.append(details)
 
     save_contacts(contact_list)
     print("Contact(s) Added Successfully!!")
@@ -72,6 +89,8 @@ def adding_cont():
 #To show entire contact list
 def showing_cont():
     '''Display all saved contacts'''
+
+
     contacts = load_contact()
 
     if contacts:
@@ -111,6 +130,7 @@ def search_cont():
 #For deleting a contact
 def delete_contact():
     """Delete a contact by name."""
+        
     contacts = load_contact()
     name_to_delete = input("Enter name to delete: ").strip().lower()
 
@@ -118,9 +138,13 @@ def delete_contact():
 
     if len(contacts) == len(updated_list):
         print("No such contact to delete.")
+
     else:
         save_contacts(updated_list)
+
         print("Contact deleted successfully!")
+
+
 
 
 
@@ -160,32 +184,50 @@ def update_cont():
 #Main Menu
 def menu():
     """Main menu loop."""
-    while True:
-        print("\n📱 Contact Book Menu:")
-        print("1. Add Contact(s)")
-        print("2. Show All Contacts")
-        print("3. Search Contact")
-        print("4. Delete Contact")
-        print("5. Update Contact")
-        print("6. Exit")
+    asking_pass = input("Enter Password :- ")
+    if asking_pass == password:
 
-        choice = input("Enter your choice (1–6): ").strip()
+        while True:
+            print("\n📱 Contact Book Menu:")
+            print("1. Add Contact(s)")
+            print("2. Show All Contacts")
+            print("3. Search Contact")
+            print("4. Delete Contact")
+            print("5. Update Contact")
+            print("6. Exit")
 
-        if choice == "1":
-            adding_cont()
-        elif choice == "2":
-            showing_cont()
-        elif choice == "3":
-            search_cont()
-        elif choice == "4":
-            delete_contact()
-        elif choice == "5":
-            update_cont()
-        elif choice == "6":
-            print("Exiting Contact Book. Goodbye!")
-            break
-        else:
-            print("Invalid choice. Please try again.")
+            choice = input("Enter your choice (1–6): ").strip()
+
+            if choice == "1":
+                adding_cont()
+            elif choice == "2":
+                showing_cont()
+            elif choice == "3":
+                search_cont()
+            elif choice == "4":
+                delete_contact()
+            elif choice == "5":
+                update_cont()
+            elif choice == "6":
+                print("Exiting Contact Book. Goodbye!")
+                break
+            else:
+                print("Invalid choice. Please try again.")
+
+#For clearing entire contact list once
+def clear_data():
+    '''Deletind Entire Contact list'''
+
+    confirmation = input("Are you sure, you want to clear your contact list? YES or NO :- ").lower()
+    if confirmation == "yes":
+        save_contacts([])
+        print("All Contacts Deleted Successfully✅")
+    else:
+        return
+
+
+    
+
 
 #Entry Point
 if __name__=="__main__":

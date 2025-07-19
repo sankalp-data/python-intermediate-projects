@@ -1,64 +1,55 @@
-A simple and functional Contact Book application written in Python.
-It uses a JSON file as a persistent database to perform basic contact management operations like:
+# Contact Book – Python GUI App
+A simple and functional Contact Book application built in Python using Tkinter GUI and JSON for data storage.
 
- - Adding contacts
-
- - Viewing all contacts
-
- - Searching contacts
-
- - Deleting contacts
-
- - Updating existing contacts
-
+This project allows you to securely store, search, and manage contacts using a clean graphical interface.
 
 # **Features**
 
- - Add multiple contacts at once
+ - Add new contacts
 
  - Search contacts by name (case-insensitive)
 
- - Display all contacts in a formatted view
-
- - Delete contacts by name
+ - View all saved contacts
 
  - Update existing contact details
 
- - Stores contacts in contacts.json (in the same directory)
+ - Delete contacts
+
+ - Password protection using config.json
+
+ - All data stored persistently in contacts.json
+
 
 # How to Run
 
 1. Make sure you have Python 3.x installed.
 
-2. Place the script in a folder.
+2. Clone/download this repository.
 
-3. Open terminal and run:
+3. Run the GUI using:
 
- - python mini_contact_manager.py
+ - python gui_main.py
+
+4. Enter the password from config.json to access the application.
 
 
 # **Concepts Used**
 
- - JSON file read/write (json module)
+- JSON file handling
 
- - List and dictionary operations
+- Tkinter for GUI
 
- - String manipulation and formatting
+- Modular function-based structure
 
- - File handling with exception safety
+- Input validation and error handling
 
- - Modular and readable function-based structure
+- Simple password protection
 
- - Input validation (try/except)
+- Persistent storage
 
-# **Error Handling**
 
- - Prevents app crash on:
+# Credit
 
- - File not found (FileNotFoundError)
+ - GUI logic (Tkinter setup) was built with the help of ChatGPT by OpenAI.
 
- - Empty or corrupted JSON (JSONDecodeError)
-
- - Invalid numeric inputs (ValueError)
-
- - Gracefully handles invalid menu choices
+ - The rest of the code (contact management, JSON handling, logic) is my original    implementation.
