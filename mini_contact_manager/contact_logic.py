@@ -213,6 +213,9 @@ def menu():
                 break
             else:
                 print("Invalid choice. Please try again.")
+    
+    else:
+        print("Password Is Wrong!!")
 
 #For clearing entire contact list once
 def clear_data():
