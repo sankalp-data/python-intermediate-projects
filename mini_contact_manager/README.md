@@ -52,4 +52,4 @@ This project allows you to securely store, search, and manage contacts using a c
 
  - GUI logic (Tkinter setup) was built with the help of ChatGPT by OpenAI.
 
- - The rest of the code (contact management, JSON handling, logic) is my original    implementation.
+ - The rest of the code (contact management, JSON handling, logic) is my original implementation.
